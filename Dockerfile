@@ -5,11 +5,7 @@ FROM php:8.2-apache
 RUN apt-get update && apt-get install -y libpq-dev \
     && docker-php-ext-install pdo pdo_pgsql pgsql pdo_mysql mysqli
 
-# Copiando o arquivo de configuração do Apache
-COPY apache-config.conf /etc/apache2/sites-available/000-default.conf
+# DANDO PERMISSÃO PARA O APACHE
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html
 
-# Ativando mod_rewrite do Apache
-RUN a2enmod rewrite
-
-# Reiniciando o Apache
-RUN service apache2 restart
