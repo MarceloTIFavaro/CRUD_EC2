@@ -21,6 +21,7 @@ services:
     restart: always # REINICIA AUTOMATICAMENTE SE CAIR
     volumes:
       - ./mysql:/var/lib/mysql # PERSISTÊNCIA DOS DADOS DO MYSQL NA PASTA LOCAL ./mysql
+      - ./mysql-init:/docker-entrypoint-initdb.d # JOGA AS TABELAS PARA DENTRO DO MYSQL
     ports:
       - "3306:3306" # EXPÕE A PORTA 3306 DO MYSQL PARA O HOST (para conexões externas, se precisar)
     environment:
@@ -28,19 +29,6 @@ services:
       MYSQL_DATABASE: crud # BANCO DE DADOS QUE SERÁ CRIADO AUTOMATICAMENTE NA PRIMEIRA INICIALIZAÇÃO
     networks:
       - app-network # MESMA REDE PARA PODER SE COMUNICAR COM OS OUTROS CONTAINERS
-
-  # INTERFACE WEB PHPMYADMIN
-  phpmyadmin:
-    image: phpmyadmin # IMAGEM OFICIAL DO PHPMyAdmin
-    restart: always # REINICIA AUTOMATICAMENTE SE CAIR
-    ports:
-      - "8080:80" # EXPÕE A PORTA 80 DO CONTAINER NA PORTA 8080 DO HOST (pra acessar no navegador)
-    environment:
-      PMA_ARBITRARY: 1 # PERMITE CONEXÃO A SERVIDORES ARBITRÁRIOS (útil pra conectar no mysql)
-      PMA_HOST: mysql # HOST DO SERVIDOR MYSQL PARA O PHPMYADMIN CONECTAR AUTOMATICAMENTE
-      PMA_PORT: 3306 # PORTA DO MYSQL
-    networks:
-      - app-network # MESMA REDE PARA PODER SE COMUNICAR
 
 # REDE PERSONALIZADA PARA OS CONTAINERS
 networks:
