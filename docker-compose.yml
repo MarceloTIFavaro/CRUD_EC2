@@ -7,6 +7,8 @@ services:
       dockerfile: Dockerfile # NOME DO DOCKERFILE A SER USADO PARA MONTAR A IMAGEM DO PHP/Apache
     container_name: php_apache # NOME DO CONTAINER PARA FACILITAR IDENTIFICAÇÃO
     restart: always # REINICIA AUTOMATICAMENTE SE O CONTAINER CAIR
+    volumes:
+      - ./crud:/var/www/html:cached  
     ports:
       - "80:80" # EXPÕE A PORTA 80 (APACHE) DO CONTAINER PARA A PORTA 80 DO HOST (seu PC)
     networks:

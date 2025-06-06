@@ -10,5 +10,7 @@ COPY ./crud /var/www/html
 
 # DANDO PERMISSÃO PARA O APACHE
 RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 777 /var/www/html
+    && chmod -R 755 /var/www/html
 
+
+    
