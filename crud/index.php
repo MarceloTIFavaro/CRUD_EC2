@@ -9,7 +9,7 @@ require 'header.php'
 
     <div class="row">
         <div class="col-8 offset-2">
-            <form class="row g-3" action="destino-index.php" method="POST">
+            <form class="row g-3" action="destino-contato.php" method="POST">
                 <div class="col-6">
                     <div class="mb-2">
                         <label for="nome">Nome:</label>
