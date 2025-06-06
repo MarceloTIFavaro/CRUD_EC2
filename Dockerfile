@@ -5,6 +5,9 @@ FROM php:8.2-apache
 RUN apt-get update && apt-get install -y libpq-dev \
     && docker-php-ext-install pdo pdo_pgsql pgsql pdo_mysql mysqli
 
+# COPIA OS ARQUIVOS PARA O /var/www/html
+COPY ./crud /var/www/html
+
 # DANDO PERMISSÃO PARA O APACHE
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 777 /var/www/html
