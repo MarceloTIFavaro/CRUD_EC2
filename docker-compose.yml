@@ -30,6 +30,21 @@ services:
     networks:
       - app-network # MESMA REDE PARA PODER SE COMUNICAR COM OS OUTROS CONTAINERS
 
+  # SERVIDOR PHPMYADMIN
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest # IMAGEM DO PHPMYADMIN (INTERFACE WEB PARA GERENCIAR O MYSQL)
+    container_name: phpmyadmin_container # NOME DO CONTAINER DO PHPMYADMIN
+    restart: always # REINICIA AUTOMATICAMENTE SE O CONTAINER CAIR
+    depends_on:
+      - mysql # GARANTE QUE O PHPMYADMIN SÓ SOBE APÓS O MYSQL ESTAR PRONTO
+    environment:
+      PMA_HOST: mysql # INDICA O HOST DO MYSQL PARA O PHPMYADMIN SE CONECTAR (NOME DO SERVIÇO)
+      MYSQL_ROOT_PASSWORD: postdba # SENHA DO ROOT DO MYSQL (MESMA CONFIGURADA NO CONTAINER MYSQL)
+    ports:
+      - "8080:80" # EXPÕE A PORTA 80 DO PHPMYADMIN PARA A PORTA 8080 DO HOST (acesso via http://localhost:8080)
+    networks:
+      - app-network # MESMA REDE PARA PERMITIR COMUNICAÇÃO COM O MYSQL
+
 # REDE PERSONALIZADA PARA OS CONTAINERS
 networks:
   app-network:
