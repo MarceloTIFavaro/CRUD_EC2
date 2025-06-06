@@ -21,7 +21,7 @@ services:
     restart: always # REINICIA AUTOMATICAMENTE SE CAIR
     volumes:
       - ./mysql:/var/lib/mysql # PERSISTÊNCIA DOS DADOS DO MYSQL NA PASTA LOCAL ./mysql
-      - ./mysql-init:/docker-entrypoint-initdb.d # JOGA AS TABELAS PARA DENTRO DO MYSQL
+      - ./crud:/docker-entrypoint-initdb.d # JOGA AS TABELAS PARA DENTRO DO MYSQL
     ports:
       - "3306:3306" # EXPÕE A PORTA 3306 DO MYSQL PARA O HOST (para conexões externas, se precisar)
     environment:
